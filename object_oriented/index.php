@@ -1,35 +1,22 @@
 <?php 
-class Dog {
-	private $leg = 4;
-	public $name;
-	public $sound = "Bark!";
-	public function __construct($leg, $name, $sound) {
-		$this->leg = $leg;
-		$this->name = $name;
-		$this->sound = $sound;
-	}
-	public function __call($name, $arguments) {
-		echo "Dog is " . $name;
-		var_dump($arguments);
-	}
-	
-	public function legcount() {
-		return $this->leg;
-	}
-}
-$dog1 = new Dog(3, 'Gotegyar', "Bark!");
-$dog2 = new Dog(4, 'TetPu', 'Whoof!');
-$dog3 = new Dog(2, 'Bo Bo', 'Woung!');
-$dog1->dance();
-$dog2->mad('Bad');
-/*
-dogdo($dog1->legcount(), $dog1->name, $dog1->sound);
-dogdo($dog2->legcount(), $dog2->name, $dog2->sound);
-dogdo($dog3->legcount(), $dog3->name, $dog3->sound);
 
-function dogdo($leg, $name, $sound) {
-	echo "My name is " . $name . ". I have " 
-		. $leg . " legs! " . $sound . "<br />";
-}
+function __autoload($class_name) {
+    require_once __DIR__ . '/src/Model/' . $class_name . '.php';
+} 
+
+/*
+require_once __DIR__ . '/src/Model/Blog.php';
+require_once __DIR__ . '/src/Model/Page.php';
 */
-?>
+$title = "Test Blog";
+$body = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil, aut, est harum rerum iure atque eligendi laboriosam ut ad a velit dolor consequatur veniam architecto non tempore eius quia debitis?";
+$date = '12-12-2012';
+
+$blog = new Blog($title, $body, $date);
+var_dump($blog);
+$page = new Page($title, $body, $date);
+var_dump($page);
+$category = new Category($title, $body, $date);
+var_dump($category);
+
+ ?>
