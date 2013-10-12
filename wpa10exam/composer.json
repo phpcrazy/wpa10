@@ -1,0 +1,20 @@
+{
+	"name": "wpa10/exam-system",
+    "license": "MIT",
+    "keywords": ["wpa10", "exam", "exam system"],
+    "authors": [
+        {
+            "name": "WPA 10 Myanmar Links",
+            "email": "myanmarlinks.net@gmail.com"
+        }
+    ],
+	"require": {
+		"monolog/monolog": "1.6.*@dev",
+		"illuminate/database": "4.0.*@dev"
+	},
+	"autoload": {
+		"psr-0": {
+			"Core\\": "src/"
+		}
+	} 
+}
