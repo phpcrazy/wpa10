@@ -8,13 +8,16 @@
             "email": "myanmarlinks.net@gmail.com"
         }
     ],
-	"require": {
-		"monolog/monolog": "1.6.*@dev",
-		"illuminate/database": "4.0.*@dev"
-	},
 	"autoload": {
 		"psr-0": {
 			"Core\\": "src/"
-		}
-	} 
+		},
+		"classmap": [
+			"lib"
+		],
+		"files": [
+			"extra/helper.php"
+		]
+	}
+
 }
