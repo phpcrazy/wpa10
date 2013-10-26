@@ -8,28 +8,22 @@ class Config {
 	} 
 	*/
 	public function __call($name, $arguments) {
-		return static::getConfig($name, $arguments);
+		return $this->configCheck($name, $argument);
 	}
 
 	public static function __callStatic($name, $arguments) {
-		return static::getConfig($name, $arguments);	
+		return static::configCheck($name, $arguments);	
 	}
 
-	private static function getConfig($name, $arguments) {
-		$filename = COND . $name . ".php";
-		if(file_exists($filename)) {
-			$var = require $filename;
-			$arg = explode('.', $arguments[0]);	
-			if(array_key_exists($arg[0], $var)) {
-				return $arg[0][1];
-			} else {
-				trigger_error('Your config data does not found in config', E_USER_ERROR);
-			}
+	protected static function configCheck($name, $argument) {
+		$file = COND . $name . '.php';
+		$config_values = require $file;
+
+		if(file_exists($file)) {
+			return $key = arrayResolver($argument, $config_values);				
 		} else {
-			trigger_error("File do not found in config folder", E_USER_ERROR);
+			trigger_error("Config file doesn't exist!", E_USER_ERROR);
 		}
-		return $var[$arguments[0]];
 	}
 }
-
- ?>
+?>
