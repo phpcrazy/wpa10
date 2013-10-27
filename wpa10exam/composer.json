@@ -8,6 +8,9 @@
             "email": "myanmarlinks.net@gmail.com"
         }
     ],
+    "require": {
+    	"symfony/http-foundation": "2.2.*@dev"
+    	},
 	"autoload": {
 		"psr-0": {
 			"Core\\": "src/"

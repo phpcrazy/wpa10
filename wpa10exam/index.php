@@ -1,39 +1,13 @@
 <?php 
 
-require __DIR__ . "/vendor/autoload.php";
+define('DD', __DIR__);
 
-define('COND', __DIR__ . '/config/');
+require_once DD . '/vendor/autoload.php';
 
-use Core\Application;
-use Core\ConfigLoader;
+use Symfony\Component\HttpFoundation\Request;
 
-// $app = new Application;
-// $config = new ConfigLoader;
+$request = Request::createFromGlobals();
 
-// $test = Config::app('site_title');
-// $config = new Config;
-// $app = $config->app('site_title');
-// echo $test;
-// echo $app;
-// $db = Config::database('db.hostname');
-// $username = Config::database('db.username');
-//echo $db . "<br />";
-// echo $username . "<br />";
-// $currency = Currency_Converter(4000);
-// echo $currency;
- ?>
+var_dump($request);
 
- <!doctype html>
- <html lang="en">
- <head>
- 	<meta charset="UTF-8">
- 	<title>Question</title>
- </head>
- <body>
- 	<?php 
- 		$app = new Application(new Question);
- 	 ?>
- 	<?php echo $app->getQuestionView('m', 0); ?>
-
- </body>
- </html>
+?>
