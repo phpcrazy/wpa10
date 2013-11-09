@@ -10,7 +10,8 @@
     ],
     "require": {
     	"symfony/http-foundation": "2.2.*@dev",
-    	"symfony/routing": "2.4.*@dev"
+    	"symfony/routing": "2.4.*@dev",
+    	"illuminate/container": "4.1.*@dev"
     	},
 	"autoload": {
 		"psr-0": {

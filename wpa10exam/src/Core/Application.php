@@ -2,53 +2,34 @@
 
 namespace Core;
 
-class Application {
-	private $question_sh;
-	private $question_multi;
-	public function __construct($question) {
-		$this->question_sh = $question->getsh();	
-		$this->question_multi = $question->getmulti();
-	}	
-	public function getQuestionView($type, $id) {
-		if ($type == 'm'){
-			if(array_key_exists($id, $this->question_multi)) {
-				$ques = $this->question_multi[$id];
-				$question = '<div class="question">';
-					$question .= '<h1>' . $ques['question'] . '</h1>';
-					foreach( $ques['answer'] as $ans){
-						$question .= '<input type="radio" name="ans" value="' . $ans .
-								'">' . $ans . '</input>' ;
-					}						
-					$question .= '</div>';
-				return $question;	
-			} else {
-				return "No question found!";
-			}
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use Illuminate\Container\Container;
 
-		}
-		elseif($type == 's'){
 
-			if(array_key_exists($id, $this->question_sh)) {
-				$ques = $this->question_sh[$id];
-				$question = '<div class="question">';
-				foreach($ques as $q) {
-					$question .= '<h1>' . $q['question'] . '</h1>';
-					$question .= '<textarea></textarea>';	
-				}
-				$question .= '</div>';
-				return $question;	
-			} else {
-				return "No question found!";
-			}
-		}
-		else{
-			return "NO question type found!";
-		}
+class Application extends Container {
+	public $var = array();
+	public function __construct() {
+		$this['request'] = Request::createFromGlobals();
+		$this['routeCollection'] = $this->share(function ($this) {
+            return new RouteCollection();
+        });
+		$this['context'] = $this->share(function($this){
+			return new RequestContext();
+		});
 
-		
-
-		
 	}
+
+	public function combineContext(){
+		$this['context']->fromRequest($this['request']);
+	}
+
 }
 
-?>
+ ?>
