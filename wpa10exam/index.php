@@ -31,7 +31,9 @@ require_once DD . '/vendor/autoload.php';
 use Core\Application;
 
 $app = new Application();
+
 $app->combineContext();
+
 dump($app['routeCollection'], false);
 dump($app['context'], true);
 

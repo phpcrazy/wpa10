@@ -23,13 +23,15 @@ class Application extends Container {
 		$this['context'] = $this->share(function($this){
 			return new RequestContext();
 		});
-
 	}
 
 	public function combineContext(){
 		$this['context']->fromRequest($this['request']);
 	}
 
+	public function routeAdd($route_name, $pattern, $closure) {
+		$this['routeCollection']->add($route_name, $pattern, $closure);
+	}
 }
 
  ?>
