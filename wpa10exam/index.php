@@ -32,10 +32,29 @@ use Core\Application;
 
 $app = new Application();
 
-$app->combineContext();
+$app->routeAdd('hello', '/hello/{name}', array(
+		'name' => 'World', 
+		'_controller' => 'HelloController::indexAction'
+	)
+);
+$app->routeAdd('bye', '/bye/{name}/{another}', array('name' => 'World', 'another' => 'for Good', '_controller' => 'byeController'));
 
-dump($app['routeCollection'], false);
-dump($app['context'], true);
+$app->combineContext();
+$app->routeMatcher();
+
+spl_autoload_register("autoloadController");
+
+$app->run();
+$app->responseSend();
+unset($app);
+
+
+function autoloadController($classname) {
+	$filename = DD . "/app/controller/" . $classname . ".php";
+	if(is_readable($filename)) {
+		require $filename;
+	} 
+}
 
 // $app['cookie_name'] = 'SESSION_ID';
 // $app['session_storage_class'] = 'SessionStorage';
@@ -48,8 +67,6 @@ $app['session_storage'] = function($c) {
 };
 */
 
-dump($app['request'], true);
 
-unset($app);
 
 ?>

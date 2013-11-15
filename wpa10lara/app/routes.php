@@ -11,6 +11,22 @@
 |
 */
 
+Route::get('/user/{id}', function($id){
+	return "Hello User" . $id;
+});
+
+Route::get('/userview', function(){
+	$title = "Myanmar Links";
+	return View::make('user')->with('title', $title);
+});
+
+Route::get('/cuser', 'UserController@actionIndex');
+
+Route::post('getuser', function(){
+	$username = Input::get('username');
+	echo $username;
+});
+
 Route::get('/', function()
 {
 	return View::make('hello');

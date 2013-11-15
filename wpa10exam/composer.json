@@ -9,13 +9,15 @@
         }
     ],
     "require": {
-    	"symfony/http-foundation": "2.2.*@dev",
+    	"symfony/http-foundation": "2.4.*@dev",
     	"symfony/routing": "2.4.*@dev",
-    	"illuminate/container": "4.1.*@dev"
+    	"illuminate/container": "4.1.*@dev",
+        "symfony/http-kernel": "2.4.*@dev"
     	},
 	"autoload": {
 		"psr-0": {
-			"Core\\": "src/"
+			"Core\\": "src/",
+            "Base\\": "app/"
 		},
 		"classmap": [
 			"lib"
