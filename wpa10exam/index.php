@@ -37,7 +37,7 @@ $app->routeAdd('hello', '/hello/{name}', array(
 		'_controller' => 'HelloController::indexAction'
 	)
 );
-$app->routeAdd('bye', '/bye/{name}/{another}', array('name' => 'World', 'another' => 'for Good', '_controller' => 'byeController'));
+$app->routeAdd('bye', '/bye/{name}/{another}', array('name' => 'World', 'another' => 'for Good', '_controller' => 'ByeController::indexAction'));
 
 $app->combineContext();
 $app->routeMatcher();

@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use Symfony\Component\HttpKernel;
+use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -13,28 +13,26 @@ use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Illuminate\Container\Container;
 
-
 class Application extends Container {
-	
 	public function __construct() {
 		$this['request'] = Request::createFromGlobals();
-		$this['routeCollection'] = $this->share(function ($this) {
-            return new RouteCollection();
-        });
 		$this['context'] = $this->share(function($this){
 			return new RequestContext();
 		});
+		$this['routeCollection'] = $this->share(function($this){
+			return new RouteCollection();
+		}); 
 		$this['resolver'] = $this->share(function($this){
-			return new HttpKernel\Controller\ControllerResolver(); // Controller
+			return new ControllerResolver();
 		});
 	}
 
-	public function combineContext(){
+	public function constructContext() {
 		$this['context']->fromRequest($this['request']);
 	}
 
-	public function routeAdd($route_name, $pattern, $array) {
-		$this['routeCollection']->add($route_name, new Route($pattern, $array));
+	public function addRoute($name, $pattern, $array) {
+		$this['routeCollection']->add($name, new Route($pattern, $array));
 	}
 
 	public function routeMatcher() {
@@ -45,21 +43,20 @@ class Application extends Container {
 
 	public function run() {
 		try {
-
-			$this['request']->attributes->add($this['matcher']->match($this['request']->getPathInfo()));
+			$this['request']->attributes->add($this['matcher']->match($this['context']->getPathInfo()));
 			$controller = $this['resolver']->getController($this['request']);
 			$arguments = $this['resolver']->getArguments($this['request'], $controller);
-			$response = call_user_func($controller, $arguments);
-			$this['response'] = new Response($response);
-		} catch (ResourceNotFoundException $e) {
+			$return = call_user_func($controller);
+			$this['response'] = new Response($return, 202);
+		} catch(ResourceNotFoundException $e) {
 			$this['response'] = new Response('Not Found', 404);
-		} catch (Exception $e) {
+		} catch(Exception $e) {
 			$this['response'] = new Response('Error', 500);
-		}
+  		}
 	}
 
-	public function responseSend() {
-		$this['response']->send();
+	public function send() {
+		$this['response']->send();	
 	}
 }
 
