@@ -25,6 +25,7 @@ class Application extends Container {
 		$this['resolver'] = $this->share(function($this){
 			return new ControllerResolver();
 		});
+
 	}
 
 	public function constructContext() {

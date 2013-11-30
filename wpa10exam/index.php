@@ -39,6 +39,10 @@ $app->routeAdd('hello', '/hello/{name}', array(
 );
 $app->routeAdd('bye', '/bye/{name}/{another}', array('name' => 'World', 'another' => 'for Good', '_controller' => 'ByeController::indexAction'));
 
+$app->routeAdd('db', '/database', array(
+	'_controller' => 'ByeController::indexAction'
+	));
+
 $app->combineContext();
 $app->routeMatcher();
 
@@ -66,6 +70,7 @@ $app['session_storage'] = function($c) {
     return $c['cookie_name'];
 };
 */
+
 
 
 

@@ -12,11 +12,15 @@
     	"symfony/http-foundation": "2.4.*@dev",
         "symfony/routing": "2.4.*@dev",
         "illuminate/container": "4.1.*@dev",
-        "symfony/http-kernel": "2.3.*@dev"
+        "symfony/http-kernel": "2.3.*@dev",
+        "twig/twig": "1.*"
     },
     "autoload": {
         "psr-0": {
             "Core\\" : "src/"
-        }
+        },
+        "classmap": [
+            "src/Helper"
+        ]
     }
 }

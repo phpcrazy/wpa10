@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,23 +12,39 @@
 |
 */
 
-Route::get('/user/{id}', function($id){
-	return "Hello User" . $id;
-});
+// Route::get
+// Route::any
+// Route::put
+// Route::delete
 
-Route::get('/userview', function(){
-	$title = "Myanmar Links";
-	return View::make('user')->with('title', $title);
-});
-
-Route::get('/cuser', 'UserController@actionIndex');
-
-Route::post('getuser', function(){
-	$username = Input::get('username');
-	echo $username;
-});
-
-Route::get('/', function()
+Route::group(array('before' => 'old'), function()
 {
-	return View::make('hello');
+    Route::any('/foo', function()
+    {
+    	return "Fool!";
+        // Has Auth Filter
+    });
+
+    Route::any('/bar', function()
+    {
+        // Has Auth Filter
+        return "Bar!";
+    });
 });
+
+Route::any('/test', array(
+	'before'	=> 'old', function(){
+		return 'You got it!';
+}));
+
+Route::any('/user', function(){
+	if(Input::has('name')) {
+		$name = Input::except('foo');
+		return $name;	
+	}
+	$response = Response::make('Not Found', 404);
+	$cookie = Cookie::make('name', 'value');
+	return $response->withCookie($cookie);
+});
+
+

@@ -14,6 +14,7 @@
 App::before(function($request)
 {
 	//
+
 });
 
 
@@ -32,6 +33,11 @@ App::after(function($request, $response)
 | integrates HTTP Basic authentication for quick, simple checking.
 |
 */
+Route::filter('old', function(){
+	if(Input::get('name') != 'thiha') {
+		return Response::make('Not Found!', 404);	
+	}
+});
 
 Route::filter('auth', function()
 {
