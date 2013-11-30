@@ -39,7 +39,8 @@ $app->routeAdd('hello', '/hello/{name}', array(
 );
 $app->routeAdd('bye', '/bye/{name}/{another}', array('name' => 'World', 'another' => 'for Good', '_controller' => 'ByeController::indexAction'));
 
-$app->routeAdd('db', '/database', array(
+$app->routeAdd('db', '/database/{name}', array(
+	'name'		=> '',
 	'_controller' => 'ByeController::indexAction'
 	));
 
