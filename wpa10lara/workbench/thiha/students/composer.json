@@ -1,0 +1,23 @@
+{
+    "name": "thiha/students",
+    "description": "",
+    "authors": [
+        {
+            "name": "thiha",
+            "email": "phpcrazy@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Thiha\\Students\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

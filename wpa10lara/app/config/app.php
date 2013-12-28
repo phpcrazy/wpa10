@@ -64,8 +64,8 @@ return array(
 	| will not be safe. Please do this before deploying an application!
 	|
 	*/
-
-	'key' => 'YourSecretKey!!!',
+	
+	'key' => 'ae2b1fca515949e5d54fb22b8ed95575',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -113,7 +113,8 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-
+		'Way\Generators\GeneratorsServiceProvider',
+		'Thiha\Students\StudentsServiceProvider',
 	),
 
 	/*
@@ -178,7 +179,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-
+		'Student'		  => 'Thiha\Students\Facades\Student',
 	),
 
 );
