@@ -1,5 +1,5 @@
 {
-    "name": "thiha/students",
+    "name": "thiha/student",
     "description": "",
     "authors": [
         {
@@ -13,10 +13,11 @@
     },
     "autoload": {
         "classmap": [
-            "src/migrations"
+            "src/migrations",
+            "src/controllers"
         ],
         "psr-0": {
-            "Thiha\\Students\\": "src/"
+            "Thiha\\Student\\": "src/"
         }
     },
     "minimum-stability": "dev"

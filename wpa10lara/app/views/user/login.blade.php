@@ -5,7 +5,7 @@
 	<title>Login Form</title>
 </head>
 <body>
-	<form method="post" action="http://thiha.me/wpa10/wpa10lara/public/login">
+	{{ Form::open(array('route' => 'userlogin')) }}
 		<p>
 			<label for="email">Email : </label>
 			<input type="text" name="email" />

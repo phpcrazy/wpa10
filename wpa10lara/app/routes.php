@@ -45,9 +45,11 @@ Route::group(array('before' => 'auth'), function(){
 		Auth::logout();
 	});
 	Route::resource('tweets', 'TweetsController');
+
+	Route::resource('blogs', 'BlogsController');
 });
 
-Route::any('/login', function(){
+Route::any('/login', array('as' => 'userlogin', function(){
 	if(Request::server('REQUEST_METHOD') == 'POST') {
 		$email	= Input::get('email');
 		$password = Input::get('password');
@@ -57,7 +59,7 @@ Route::any('/login', function(){
 		}
 	}
 	return View::make('user.login');
-});
+}));
 
 Route::group(array('prefix' => 'question'), function()
 {
@@ -145,3 +147,7 @@ Route::any('/login', function(){
 	return View::make('user.login');
 });
 */
+
+Route::get('wpa11/hello/{name}', function($name){
+	return "Hello from WPA 11, I'm " .$name;
+});

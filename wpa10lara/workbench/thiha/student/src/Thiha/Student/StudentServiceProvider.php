@@ -1,8 +1,8 @@
-<?php namespace Thiha\Students;
+<?php namespace Thiha\Student;
 
 use Illuminate\Support\ServiceProvider;
 
-class StudentsServiceProvider extends ServiceProvider {
+class StudentServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -18,8 +18,7 @@ class StudentsServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('thiha/students');
-		include __DIR__ . "/../../routes.php";
+		$this->package('thiha/student');
 	}
 
 	/**
@@ -30,9 +29,6 @@ class StudentsServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		//
-		$this->app['student'] = $this->app->share(function($app){
-			return new Student;
-  		});
 	}
 
 	/**
